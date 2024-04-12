@@ -33,12 +33,13 @@ jobs:
     needs: build
     steps:
       - name: Checkout destination repository 
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           repository: theDevFlex/neuralflow
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           path : neuralflow
       - name: instpecting file system
+        run: git clone https://github.com/theDevFlex/layer-add-automation.git
         run: ls
       # - name: Copy Files
       #   run: |
