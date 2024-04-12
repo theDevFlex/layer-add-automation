@@ -40,24 +40,28 @@ jobs:
           path : neuralflow
       - name: instpecting file system
         run: git clone https://github.com/theDevFlex/layer-add-automation.git
+      - name: updating requirements
+        run: pip install -r layer-add-automation/requirements.txt
+      - name: Run Script 
+        run: python layer-add-automation/main.py
       - name: checking_available_dir
         run: ls
-      # - name: Copy Files
-      #   run: |
-      #     cp -r ./layer-add-automation/all_layer.ts ./neuralflow/packages/tf/layers/all_layers.ts
-      # - name: Configure Git
-      #   run: |
-      #     git config --global user.email "bot@devflex.co.in"
-      #     git config --global user.name "theDevFlex"
-      #   working-directory: ./neuralflow
+      - name: Copy Files
+        run: |
+          cp -r layer-add-automation/all_layer.ts neuralflow/packages/tf/layers/all_layers.ts
+      - name: Configure Git
+        run: |
+          git config --global user.email "bot@devflex.co.in"
+          git config --global user.name "theDevFlex"
+        working-directory: ./neuralflow
 
-      # - name: Commit and push changes
-      #   run: |
-      #     cd neuralflow
-      #     git checkout -b layers_adding
-      #     git add .
-      #     git commit -m "adding all layers"
-      #     git push
+      - name: Commit and push changes
+        run: |
+          cd neuralflow
+          git checkout -b layers_adding
+          git add .
+          git commit -m "adding all layers"
+          git push
           
             
           
