@@ -22,3 +22,5 @@ jobs:
         run: pip install -r requirements.txt
       - name: running script
         run : python main.py
+      - name : file checking
+        run : ls
