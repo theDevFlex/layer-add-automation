@@ -21,24 +21,34 @@ jobs:
           # Optional - x64 or x86 architecture, defaults to x64
           architecture: 'x64'
       # You can test your matrix by printing the current Python version
-      - name: Installing dependencies
-        run: pip install -r requirements.txt
-      - name: running script
-        run: python main.py
+      # - name: Installing dependencies
+      #   run: pip install -r requirements.txt
+      # - name: running script
+      #   run: python main.py
+      - name: Dummy file creation
+        run: touch all_layer.ts
 
   sync_content:
     runs-on: ubuntu-latest
     needs: build
     steps:
       - name: Checkout destination repository 
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           repository: theDevFlex/neuralflow
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           path : neuralflow
+      - name: instpecting file system
+        run: git clone https://github.com/theDevFlex/layer-add-automation.git
+      - name: updating requirements
+        run: pip install -r layer-add-automation/requirements.txt
+      - name: Run Script 
+        run: python layer-add-automation/main.py
+      - name: checking_available_dir
+        run: ls
       - name: Copy Files
         run: |
-          mv -r ./layer-add-automation/all_layer.ts ./neuralflow/packages/tf/layers/all_layers.ts
+          cp -r all_layer.ts neuralflow/packages/tf/layers/all_layers.ts
       - name: Configure Git
         run: |
           git config --global user.email "bot@devflex.co.in"
@@ -51,7 +61,7 @@ jobs:
           git checkout -b layers_adding
           git add .
           git commit -m "adding all layers"
-          git push
+          git push origin layers_adding
           
             
           

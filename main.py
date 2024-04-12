@@ -73,9 +73,10 @@ def create_ts_files(layers, main_code=[]):
         
         # Generate <layer_name>.config.ts
         config_lines = "["
-        
+        # line = ""
         for param_name, param_info in params.items():
-
+            if config_lines!="[":
+                config_lines += ","
             line = "{"
             line += f'name: "{param_name}"'
             if not param_info["required"]:
@@ -84,7 +85,7 @@ def create_ts_files(layers, main_code=[]):
             else:
                 # line['isRequired']= str(param_info["required"]).lower()
                 line+=f', isRequired: {str(param_info["required"]).lower()}'
-            line += ' },'
+            line += ' }'
             
             config_lines+=line+""
         
@@ -92,11 +93,9 @@ def create_ts_files(layers, main_code=[]):
     
 
         if layer_name == "Input":
-            code  = f"""{{
-            name : "{layer_name}", nameTf : "{layer_name}", import_link : "from tensorflow.keras import Input" , args : """+config_lines+f"""}};"""
+            code  = f"""{{name : "{layer_name}", nameTf : "{layer_name}", import_link : "from tensorflow.keras import Input" , args : """+config_lines+f"""}},\n"""
         else :
-            code  = f"""{{
-            name : "{layer_name}", nameTf : "{layer_name}", args : """+config_lines+f"""}};"""
+            code  = f"""{{name : "{layer_name}", nameTf : "{layer_name}", args : """+config_lines+f"""}},\n"""
 
 
         main_code+=code
@@ -150,7 +149,7 @@ if __name__ == "__main__":
         # Note: The format of main_code might need adjustments to correctly write into the file
         f.write("import { Bool, Float, Tuple,Int, None, Str } from \"@/packages/typewriter\";\n")
         f.write("import { LayerBaseConfig } from \"./types\";\n\n")
-        f.write("export const LAYERS: LayerBaseConfig[] = " + main_code + ";")
+        f.write("export const LAYERS: LayerBaseConfig[] = [\n" + main_code+"\n]" )
     print("Writing finished")
 
 
