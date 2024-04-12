@@ -38,7 +38,7 @@ jobs:
           path : neuralflow
       - name: Copy Files
         run: |
-          cp -r all_layer.ts ./neuralflow/packages/tf/layers/all_layers.ts
+          mv -r ./layer-add-automation/all_layer.ts ./neuralflow/packages/tf/layers/all_layers.ts
       - name: Configure Git
         run: |
           git config --global user.email "bot@devflex.co.in"
