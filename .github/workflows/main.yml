@@ -55,13 +55,13 @@ jobs:
           git config --global user.name "theDevFlex"
         working-directory: ./neuralflow
 
-      # - name: Commit and push changes
-      #   run: |
-      #     cd neuralflow
-      #     git checkout -b layers_adding
-      #     git add .
-      #     git commit -m "adding all layers"
-      #     git push
+      - name: Commit and push changes
+        run: |
+          cd neuralflow
+          git checkout -b layers_adding
+          git add .
+          git commit -m "adding all layers"
+          git push
           
             
           
