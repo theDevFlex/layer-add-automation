@@ -33,7 +33,7 @@ jobs:
       - name: Checkout destination repository 
         uses: actions/checkout@v2
         with:
-          repository: https://github.com/theDevFlex/neuralflow.git
+          repository: theDevFlex/neuralflow
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           path : neuralflow
       - name: Copy Files
