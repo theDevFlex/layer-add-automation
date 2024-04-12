@@ -93,7 +93,7 @@ def create_ts_files(layers, main_code=[]):
     
 
         if layer_name == "Input":
-            code  = f"""{{name : "{layer_name}", nameTf : "{layer_name}", import_link : "from tensorflow.keras import Input" , args : """+config_lines+f"""}},\n"""
+            code  = f"""{{name : "{layer_name}", nameTf : "{layer_name}", importLink : "from tensorflow.keras import Input" , args : """+config_lines+f"""}},\n"""
         else :
             code  = f"""{{name : "{layer_name}", nameTf : "{layer_name}", args : """+config_lines+f"""}},\n"""
 
