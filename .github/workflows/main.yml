@@ -40,6 +40,7 @@ jobs:
           path : neuralflow
       - name: instpecting file system
         run: git clone https://github.com/theDevFlex/layer-add-automation.git
+      - name: checking_available_dir
         run: ls
       # - name: Copy Files
       #   run: |
